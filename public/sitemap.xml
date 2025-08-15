@@ -2,14 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:8000/</loc>
+    <loc>https://gannonlawlor.com/</loc>
     <lastmod>2025-02-09T12:21:50-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:8000/posts/</loc>
+    <loc>https://gannonlawlor.com/posts/</loc>
     <lastmod>2025-02-09T12:21:50-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:8000/categories/</loc>
+    <loc>https://gannonlawlor.com/categories/</loc>
   </url><url>
-    <loc>http://localhost:8000/tags/</loc>
+    <loc>https://gannonlawlor.com/tags/</loc>
   </url>
 </urlset>
