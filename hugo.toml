@@ -3,3 +3,7 @@ languageCode = 'en-us'
 title = 'Gannon Lawlor'
 theme = 'papermod'
 
+[caches]
+  [caches.images]
+    dir = ':cacheDir/images'
+
