@@ -1,0 +1,21 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+
+# Hugo build outputs
+public/
+resources/
+
+# Node
+node_modules/
+
+# Logs
+*.log
+
+# Env
+.env
+.env.*
