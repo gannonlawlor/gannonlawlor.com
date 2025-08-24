@@ -1,6 +1,7 @@
 baseURL = 'https://gannonlawlor.com/'
 languageCode = 'en-us'
 title = 'Gannon Lawlor'
+theme = ["PaperMod"]
 
 [caches]
   [caches.images]
