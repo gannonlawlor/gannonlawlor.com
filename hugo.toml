@@ -3,6 +3,12 @@ languageCode = 'en-us'
 title = 'Gannon Lawlor'
 theme = ["PaperMod"]
 
+[menu]
+  [[menu.main]]
+    identifier = "posts"
+    name = "Posts"
+    url = "/posts/"
+
 [caches]
   [caches.images]
     dir = ':cacheDir/images'
