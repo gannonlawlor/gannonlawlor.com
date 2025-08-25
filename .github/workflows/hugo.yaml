@@ -103,6 +103,13 @@ jobs:
           path: ${{ runner.temp }}/hugo_cache
           key: hugo-${{ github.run_id }}
           restore-keys: hugo-
+      - name: Verify Hugo can access token
+        continue-on-error: true
+        run: |
+          echo "Testing Hugo config access..."
+          hugo config | grep -i cloudflare || echo "No cloudflare config found"
+        env:
+          HUGO_PARAMS_CLOUDFLAREANALYTICSTOKEN: ${{ secrets.HUGO_PARAMS_CLOUDFLAREANALYTICSTOKEN }}
       - name: Build the site
         run: |
           hugo \
