@@ -4,6 +4,7 @@ title = 'Gannon Lawlor'
 theme = ["PaperMod"]
 
 [params]
+  cloudflareAnalyticsToken = ""  # Set via HUGO_PARAMS_CLOUDFLAREANALYTICSTOKEN environment variable
   [params.assets]
     favicon = "/favicon/favicon.ico"
     favicon16x16 = "/favicon/favicon-16x16.png"
