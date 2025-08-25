@@ -74,6 +74,8 @@ jobs:
           echo ""
           echo "=== Secrets Check ==="
           echo "HUGO_PARAMS_CLOUDFLAREANALYTICSTOKEN secret exists: ${{ secrets.HUGO_PARAMS_CLOUDFLAREANALYTICSTOKEN != '' }}"
+          echo "Secret value length: ${{ length(secrets.HUGO_PARAMS_CLOUDFLAREANALYTICSTOKEN) }}"
+          echo "All available secrets keys: ${{ toJson(secrets) }}"
         env:
           HUGO_PARAMS_CLOUDFLAREANALYTICSTOKEN: ${{ secrets.HUGO_PARAMS_CLOUDFLAREANALYTICSTOKEN }}
       - name: Check Cloudflare Analytics Token
