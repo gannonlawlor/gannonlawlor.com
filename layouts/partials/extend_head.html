@@ -1,4 +1,4 @@
-{{- if site.Params.cloudflareAnalyticsToken -}}
+{{- if and (hugo.IsProduction | or (eq site.Params.env "production")) site.Params.cloudflareAnalyticsToken -}}
 <!-- Cloudflare Web Analytics -->
 <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "{{ site.Params.cloudflareAnalyticsToken }}"}'></script>
 <!-- End Cloudflare Web Analytics -->
