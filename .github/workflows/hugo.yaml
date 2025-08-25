@@ -63,6 +63,18 @@ jobs:
           echo "Go: $(go version)"
           echo "Hugo: $(hugo version)"
           echo "Node.js: $(node --version)"
+      - name: Check Cloudflare Analytics Token
+        continue-on-error: true
+        run: |
+          if [ -n "$HUGO_PARAMS_CLOUDFLAREANALYTICSTOKEN" ]; then
+            echo "✅ Cloudflare Analytics token is set"
+            echo "Token length: ${#HUGO_PARAMS_CLOUDFLAREANALYTICSTOKEN} characters"
+          else
+            echo "⚠️  Warning: HUGO_PARAMS_CLOUDFLAREANALYTICSTOKEN environment variable is not set"
+            echo "Analytics will not be included in the build"
+          fi
+        env:
+          HUGO_PARAMS_CLOUDFLAREANALYTICSTOKEN: ${{ secrets.HUGO_PARAMS_CLOUDFLAREANALYTICSTOKEN }}
       - name: Install Node.js dependencies
         run: |
           [[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true
@@ -83,6 +95,8 @@ jobs:
             --minify \
             --baseURL "${{ steps.pages.outputs.base_url }}/" \
             --cacheDir "${{ runner.temp }}/hugo_cache"
+        env:
+          HUGO_PARAMS_CLOUDFLAREANALYTICSTOKEN: ${{ secrets.HUGO_PARAMS_CLOUDFLAREANALYTICSTOKEN }}
       - name: Cache save
         id: cache-save
         uses: actions/cache/save@v4
