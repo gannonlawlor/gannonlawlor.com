@@ -63,12 +63,26 @@ jobs:
           echo "Go: $(go version)"
           echo "Hugo: $(hugo version)"
           echo "Node.js: $(node --version)"
+      - name: Debug Environment Variables
+        continue-on-error: true
+        run: |
+          echo "=== All Environment Variables ==="
+          env | sort
+          echo ""
+          echo "=== HUGO-related Variables ==="
+          env | grep -i hugo || echo "No HUGO variables found"
+          echo ""
+          echo "=== Secrets Check ==="
+          echo "HUGO_PARAMS_CLOUDFLAREANALYTICSTOKEN secret exists: ${{ secrets.HUGO_PARAMS_CLOUDFLAREANALYTICSTOKEN != '' }}"
+        env:
+          HUGO_PARAMS_CLOUDFLAREANALYTICSTOKEN: ${{ secrets.HUGO_PARAMS_CLOUDFLAREANALYTICSTOKEN }}
       - name: Check Cloudflare Analytics Token
         continue-on-error: true
         run: |
           if [ -n "$HUGO_PARAMS_CLOUDFLAREANALYTICSTOKEN" ]; then
             echo "✅ Cloudflare Analytics token is set"
             echo "Token length: ${#HUGO_PARAMS_CLOUDFLAREANALYTICSTOKEN} characters"
+            echo "First 8 chars: ${HUGO_PARAMS_CLOUDFLAREANALYTICSTOKEN:0:8}..."
           else
             echo "⚠️  Warning: HUGO_PARAMS_CLOUDFLAREANALYTICSTOKEN environment variable is not set"
             echo "Analytics will not be included in the build"
