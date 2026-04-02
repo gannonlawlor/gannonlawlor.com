@@ -12,11 +12,9 @@ theme = ["PaperMod"]
     apple_touch_icon = "/favicon/apple-touch-icon.png"
     safari_pinned_tab = "/favicon/favicon.ico"
 
-[menu]
-  [[menu.main]]
-    identifier = "posts"
-    name = "Posts"
-    url = "/posts/"
+[[params.socialIcons]]
+  name = "github"
+  url = "https://github.com/gannonlawlor"
 
 [caches]
   [caches.images]
