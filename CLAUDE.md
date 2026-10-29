@@ -6,14 +6,14 @@ Personal blog at gannonlawlor.com, built with Hugo and the PaperMod theme.
 
 ## Stack
 
-- **Hugo** (v0.156+, extended) — static site generator
+- **Hugo** (v0.158+, extended) — static site generator
 - **PaperMod** — theme (in `themes/PaperMod/`, do not edit directly)
 - **Cloudflare** — hosting and analytics
 
 ## Structure
 
 - `content/posts/` — blog posts (Markdown with YAML front matter)
-- `layouts/partials/` — template overrides (extends PaperMod)
+- `layouts/_partials/` — template overrides (extends PaperMod)
 - `static/` — static assets (images, favicon, etc.)
 - `hugo.toml` — site configuration
 
