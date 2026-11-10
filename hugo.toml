@@ -13,10 +13,13 @@ theme = ["PaperMod"]
     safari_pinned_tab = "/favicon/favicon.ico"
 
 [params.homeInfoParams]
-  Title = "Hi, I'm Gannon 👋"
+  Title = "Hi, I'm Gannon."
   Content = """
-I'm a software engineer with 12 years of experience shipping products used by millions, from big tech at **Meta**, **Peloton** and **Twitter** to early-stage startups.
-I build across the full stack, from web frontends and backend services to native mobile apps on Android and iOS, and I've led features from first prototype to global launch.
+I'm a software engineer with 12 years of experience. I've worked at **Meta**, **Peloton**, and **Twitter**, as well as early-stage startups.
+
+I've built web apps, backend services, and native apps for Android and iOS. I've worked in large codebases running on billions of devices, and built products from scratch with small teams, adapting them as they grew from their first few users.
+
+You can find my code on [GitHub](https://github.com/gannonlawlor) or get in touch on [LinkedIn](https://www.linkedin.com/in/gannonlawlor/).
 """
 
 [[params.socialIcons]]
