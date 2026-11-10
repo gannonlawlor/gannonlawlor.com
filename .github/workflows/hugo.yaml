@@ -18,29 +18,29 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      DART_SASS_VERSION: 1.107.0
-      GO_VERSION: 1.27.3
+      DART_SASS_VERSION: 1.108.1
+      GO_VERSION: 1.27.4
       HUGO_VERSION: 0.169.0
-      NODE_VERSION: 22.23.4
+      NODE_VERSION: 26.13.0
       TZ: America/New_York
     steps:
       - name: Checkout
-        uses: actions/checkout@v7
+        uses: actions/checkout@v7.0.1
         with:
           submodules: recursive
           fetch-depth: 0
       - name: Setup Go
-        uses: actions/setup-go@v7
+        uses: actions/setup-go@v7.0.0
         with:
           go-version: ${{ env.GO_VERSION }}
           cache: false
       - name: Setup Node.js
-        uses: actions/setup-node@v7
+        uses: actions/setup-node@v7.1.0
         with:
           node-version: ${{ env.NODE_VERSION }}
       - name: Setup Pages
         id: pages
-        uses: actions/configure-pages@v6
+        uses: actions/configure-pages@v6.0.0
       - name: Create directory for user-specific executable files
         run: |
           mkdir -p "${HOME}/.local"
@@ -63,33 +63,6 @@ jobs:
           echo "Go: $(go version)"
           echo "Hugo: $(hugo version)"
           echo "Node.js: $(node --version)"
-      - name: Debug Environment Variables
-        continue-on-error: true
-        run: |
-          echo "=== All Environment Variables ==="
-          env | sort
-          echo ""
-          echo "=== HUGO-related Variables ==="
-          env | grep -i hugo || echo "No HUGO variables found"
-          echo ""
-          echo "=== Secrets Check ==="
-          echo "HUGO_PARAMS_CLOUDFLAREANALYTICSTOKEN secret exists: ${{ secrets.HUGO_PARAMS_CLOUDFLAREANALYTICSTOKEN != '' }}"
-          echo "All available secrets keys: ${{ toJson(secrets) }}"
-        env:
-          HUGO_PARAMS_CLOUDFLAREANALYTICSTOKEN: ${{ secrets.HUGO_PARAMS_CLOUDFLAREANALYTICSTOKEN }}
-      - name: Check Cloudflare Analytics Token
-        continue-on-error: true
-        run: |
-          if [ -n "$HUGO_PARAMS_CLOUDFLAREANALYTICSTOKEN" ]; then
-            echo "✅ Cloudflare Analytics token is set"
-            echo "Token length: ${#HUGO_PARAMS_CLOUDFLAREANALYTICSTOKEN} characters"
-            echo "First 8 chars: ${HUGO_PARAMS_CLOUDFLAREANALYTICSTOKEN:0:8}..."
-          else
-            echo "⚠️  Warning: HUGO_PARAMS_CLOUDFLAREANALYTICSTOKEN environment variable is not set"
-            echo "Analytics will not be included in the build"
-          fi
-        env:
-          HUGO_PARAMS_CLOUDFLAREANALYTICSTOKEN: ${{ secrets.HUGO_PARAMS_CLOUDFLAREANALYTICSTOKEN }}
       - name: Install Node.js dependencies
         run: |
           [[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true
@@ -98,18 +71,11 @@ jobs:
           git config core.quotepath false
       - name: Cache restore
         id: cache-restore
-        uses: actions/cache/restore@v6
+        uses: actions/cache/restore@v6.1.0
         with:
           path: ${{ runner.temp }}/hugo_cache
           key: hugo-${{ github.run_id }}
           restore-keys: hugo-
-      - name: Verify Hugo can access token
-        continue-on-error: true
-        run: |
-          echo "Testing Hugo config access..."
-          hugo config | grep -i cloudflare || echo "No cloudflare config found"
-        env:
-          HUGO_PARAMS_CLOUDFLAREANALYTICSTOKEN: ${{ secrets.HUGO_PARAMS_CLOUDFLAREANALYTICSTOKEN }}
       - name: Build the site
         run: |
           hugo \
@@ -122,12 +88,12 @@ jobs:
           HUGO_PARAMS_CLOUDFLAREANALYTICSTOKEN: ${{ secrets.HUGO_PARAMS_CLOUDFLAREANALYTICSTOKEN }}
       - name: Cache save
         id: cache-save
-        uses: actions/cache/save@v6
+        uses: actions/cache/save@v6.1.0
         with:
           path: ${{ runner.temp }}/hugo_cache
           key: ${{ steps.cache-restore.outputs.cache-primary-key }}
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v5
+        uses: actions/upload-pages-artifact@v5.0.0
         with:
           path: ./public
   deploy:
@@ -139,4 +105,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v5
+        uses: actions/deploy-pages@v5.0.1
